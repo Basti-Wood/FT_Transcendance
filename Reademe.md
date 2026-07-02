@@ -1,0 +1,27 @@
+# Mandatory
+- clear frontend
+- .env in gitignore
+- clear database scheme
+- login/signup system.
+	- email + password minimum
+	- 2 FA
+# interesting modules
+- User chat
+	- basic chat rooms
+	- profiles
+	- friend system
+- ORM database
+- Accessibility compliance
+- Standard user management and authentication
+- Advanced permissions system
+- 2 FA
+- LLM system interface
+	- multiple LLMs?
+	- rate limit
+- Speech to text
+- Implement Chess
+- online fighting capability
+- Game customisation:
+	- anarchy mode
+- distinkt mode?:
+	- real time conquest mode (you tell an AI what you want to do, like the chess game in no game no life, moral meter)
