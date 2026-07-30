@@ -1,0 +1,33 @@
+-- ============================================================
+-- FT_Transcendance — Database Initialization
+-- This script runs automatically when the MariaDB container
+-- starts for the first time.
+-- ============================================================
+
+-- The database `${MARIADB_DATABASE}` and user `${MARIADB_USER}`
+-- are already created by the container entrypoint using the
+-- environment variables in docker-compose.yml.
+--
+-- Use this file to create your application tables, indexes,
+-- triggers, and seed data.
+
+-- Example: Users table (uncomment and customize)
+-- CREATE TABLE IF NOT EXISTS users (
+--     id          INT AUTO_INCREMENT PRIMARY KEY,
+--     username    VARCHAR(50)  UNIQUE NOT NULL,
+--     email       VARCHAR(100) UNIQUE NOT NULL,
+--     password    VARCHAR(255) NOT NULL,
+--     avatar      VARCHAR(255) DEFAULT NULL,
+--     created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+--     updated_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Example: Game stats table
+-- CREATE TABLE IF NOT EXISTS game_stats (
+--     id          INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id     INT NOT NULL,
+--     wins        INT DEFAULT 0,
+--     losses      INT DEFAULT 0,
+--     rank        INT DEFAULT 0,
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

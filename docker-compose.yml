@@ -1,6 +1,64 @@
+services:
 
-service:
-
-  frontend:
-  backend:
+  # ── MariaDB Database ──────────────────────────────────────
   database:
+    build: ./Docker/Database
+    container_name: transcendance_db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - transcendance_network
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ── Backend (Django / FastAPI / etc.) ─────────────────────
+  backend:
+    build: ./Docker/Backend
+    container_name: transcendance_backend
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    # environment:
+    #   DB_HOST: database
+    #   DB_PORT: 3306
+    #   DB_NAME: ${DB_NAME}
+    #   DB_USER: ${DB_USER}
+    #   DB_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - transcendance_network
+
+  # ── Frontend (static served by Nginx) ─────────────────────
+  frontend:
+    build: ./Docker/Frontend
+    container_name: transcendance_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - transcendance_network
+
+# ── Volumes ─────────────────────────────────────────────────
+volumes:
+  db_data:
+    driver: local
+
+# ── Networks ────────────────────────────────────────────────
+networks:
+  transcendance_network:
+    driver: bridge

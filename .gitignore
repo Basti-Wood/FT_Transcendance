@@ -1,2 +1,4 @@
 .env
 Database/*
+!Database/init.sql
+!Database/*.sql

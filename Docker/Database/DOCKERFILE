@@ -1,0 +1,7 @@
+FROM mariadb:latest
+
+# Copy custom MariaDB configuration (optional)
+# Uncomment and create a custom my.cnf if needed:
+# COPY conf/my.cnf /etc/mysql/conf.d/my.cnf
+
+EXPOSE 3306
